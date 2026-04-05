@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>يونس عبد القادر محمد غريب | نبذة شخصية</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #ffffff);
+      color: #1f2937;
+      line-height: 1.9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f3d91, #2563eb);
+      color: white;
+      padding: 70px 0;
+      overflow: hidden;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .hero-text h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 20px;
+      color: #dbeafe;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      max-width: 700px;
+    }
+
+    .hero-image {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    .hero-image img {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid rgba(255,255,255,0.9);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      background: white;
+    }
+
+    nav {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 15px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0f3d91;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      color: #0f3d91;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .about p {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      border: 1px solid #c7dcff;
+    }
+
+    .stat-box h3 {
+      font-size: 30px;
+      color: #0f3d91;
+      margin-bottom: 10px;
+    }
+
+    .stat-box p {
+      font-size: 17px;
+      color: #334155;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .book-item {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+      border-right: 5px solid #2563eb;
+      font-size: 17px;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #0f3d91, #2563eb);
+      color: white;
+      border-radius: 22px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.25);
+    }
+
+    .highlight p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .channel-box {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+      border-top: 5px solid #2563eb;
+    }
+
+    .channel-box h3 {
+      color: #0f3d91;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .channel-box p {
+      font-size: 17px;
+    }
+
+    footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 24px;
+      background: white;
+      color: #0f3d91;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: #dbeafe;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        text-align: center;
+        justify-content: center;
+      }
+
+      .hero-text h1 {
+        font-size: 30px;
+      }
+
+      .hero-text h2 {
+        font-size: 18px;
+      }
+
+      .hero-image img {
+        width: 250px;
+        height: 250px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container hero">
+      <div class="hero-text">
+        <h1>يونس عبد القادر محمد غريب</h1>
+        <h2>أخصائي بصريات | مؤلف | مدير ملتقى أخصائي البصريات</h2>
+        <p>
+          خريج الكلية التقنية الطبية – قسم البصريات الطبية، وأعمل في هذا المجال منذ عدة سنوات،
+          مع اهتمام مستمر بالتطوير العلمي والمهني، وحاصل على ما يقارب ثلاثين شهادة في مجالات متعددة.
+        </p>
+        <a href="#about" class="btn">اقرأ المزيد</a>
+      </div>
+
+      <div class="hero-image">
+        <img src="money.jpg" alt="الصورة الشخصية">
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#about">نبذة</a>
+      <a href="#books">المؤلفات</a>
+      <a href="#library">المكتبة</a>
+      <a href="#activities">الأنشطة</a>
+      <a href="#channels">القنوات</a>
+    </div>
+  </nav>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">نبذة عن المؤلف</h2>
+      <div class="card about">
+        <p>
+          أنا يونس عبد القادر محمد غريب، خريج الكلية التقنية الطبية – قسم البصريات الطبية،
+          وأعمل في هذا المجال منذ عدة سنوات مع اهتمام مستمر بتطوير نفسي علميًا ومهنيًا.
+        </p>
+        <p>
+          حصلت على ما يقارب ثلاثين شهادة في مجالات مختلفة، وأسعى إلى الجمع بين المعرفة الطبية
+          والثقافة الإنسانية والفكرية، مع اهتمام خاص بالتأليف ونشر المعرفة.
+        </p>
+        <p>
+          أؤمن بأهمية تطوير الإنسان علميًا وفكريًا واجتماعيًا، ولذلك كتبت في مجالات متعددة
+          تجمع بين الطب، والمجتمع، والفلسفة، وعلم النفس، واللغة.
+        </p>
+
+        <div class="stats">
+          <div class="stat-box">
+            <h3>30</h3>
+            <p>شهادة تقريبًا في مجالات متعددة</p>
+          </div>
+          <div class="stat-box">
+            <h3>8000</h3>
+            <p>كتاب في مكتبة البصريات الإلكترونية</p>
+          </div>
+          <div class="stat-box">
+            <h3>20+</h3>
+            <p>كتابًا في مجالات متنوعة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <div class="container">
+      <h2 class="section-title">أبرز المؤلفات</h2>
+      <div class="books-grid">
+        <div class="book-item">موسوعة الأمراض الشائعة</div>
+        <div class="book-item">التجارة الإلكترونية</div>
+        <div class="book-item">مبادئ الذكاء الاصطناعي</div>
+        <div class="book-item">أسس علم الفيزياء</div>
+        <div class="book-item">أسس علم الاجتماع</div>
+        <div class="book-item">صوت الرجل</div>
+        <div class="book-item">صوت المرأة</div>
+        <div class="book-item">فن الزواج وبناء بيت السعادة</div>
+        <div class="book-item">فلسفة السعادة (بين المجتمعات)</div>
+        <div class="book-item">هندسة العلاقات الاجتماعية</div>
+        <div class="book-item">غربلة المشكلات الاجتماعية</div>
+        <div class="book-item">السياسة الإنسانية العالمية</div>
+        <div class="book-item">الاقتصادية الإنسانية العالمية</div>
+        <div class="book-item">الأسس المنطقية الإسلامية</div>
+        <div class="book-item">أسس الفلسفة الإسلامية</div>
+        <div class="book-item">الفلسفة الإنسانية العالمية</div>
+        <div class="book-item">أسس الصحة النفسية</div>
+        <div class="book-item">العقد النفسية</div>
+        <div class="book-item">أسس علم النفس</div>
+        <div class="book-item">اللغة الإنكليزية (مفردات)</div>
+        <div class="book-item">اللغة الإنكليزية (محادثات)</div>
+        <div class="book-item">100 معلومة حول الصحة النفسية</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="library">
+    <div class="container">
+      <div class="highlight">
+        <h2>المكتبة الإلكترونية التخصصية</h2>
+        <p>
+          أمتلك مكتبة إلكترونية في مجال البصريات تضم ما يقارب 8000 كتاب متخصص في مجال العين البشرية،
+          بهدف دعم المعرفة العلمية وتوفير مصادر متقدمة للمتخصصين والمهتمين.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities">
+    <div class="container">
+      <h2 class="section-title">الأنشطة المهنية</h2>
+      <div class="card">
+        <p>
+          أعمل مديرًا لملتقى أخصائي البصريات، وأسعى من خلاله إلى تبادل الخبرات والمعلومات
+          بين المختصين، وتعزيز التعاون العلمي والمهني في هذا المجال.
+        </p>
+        <p>
+          كما أهتم ببناء محتوى علمي وثقافي متوازن يجمع بين المعرفة الطبية والرؤية الإنسانية.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="channels">
+    <div class="container">
+      <h2 class="section-title">القنوات والمنصات</h2>
+      <div class="channels">
+        <div class="channel-box">
+          <h3>Younis Optometrist</h3>
+          <p>
+            قناة متخصصة أشارك فيها معلومات طبية متعلقة بالبصريات ومحتوى علمي مهني يفيد المختصين والمهتمين.
+          </p>
+        </div>
+
+        <div class="channel-box">
+          <h3>يونس عبدالقادر محمد غريب</h3>
+          <p>
+            قناة أنشر فيها محتوى ثقافيًا واجتماعيًا وفلسفيًا ولغويًا يعكس اهتمامي بالتأليف والفكر وتطوير الوعي.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    جميع الحقوق محفوظة © يونس عبد القادر محمد غريب
+  </footer>
+
+</body>
+</html>
