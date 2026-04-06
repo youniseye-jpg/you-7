@@ -1,28 +1,70 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>يونس عبد القادر محمد غريب</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يونس عبد القادر محمد غريب</title>
 
-  <style>
-    body {
-      font-family: Tahoma;
-      text-align: center;
-      background: #f5f5f5;
-    }
+<style>
+body{
+  font-family:Tahoma;
+  text-align:center;
+  background: linear-gradient(135deg,#0f3d91,#2563eb);
+  color:white;
+  margin:0;
+}
 
-    .section {
-      margin: 40px auto;
-      width: 80%;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-    }
-  </style>
+.container{
+  width:90%;
+  max-width:900px;
+  margin:auto;
+  padding:40px 0;
+}
+
+.section{
+  background:white;
+  color:black;
+  padding:20px;
+  border-radius:15px;
+  margin-top:30px;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 25px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-size:18px;
+  transition:0.3s;
+}
+.btn:hover{
+  background:#1e40af;
+}
+
+.video-box{
+  position:relative;
+  padding-bottom:56.25%;
+  height:0;
+}
+.video-box iframe{
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  border-radius:12px;
+}
+</style>
+
 </head>
 
 <body>
+
+<div class="container">
 
   <h1>يونس عبد القادر محمد غريب</h1>
 
@@ -31,17 +73,25 @@
     <p>أخصائي بصريات ومؤلف مهتم بالتطوير العلمي والمعرفي.</p>
   </div>
 
-  <!-- 🔥 هنا الفيديو في المكان الصحيح -->
   <div class="section">
     <h2>الفيديو</h2>
 
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/kEk17v9U4jM"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
+```
+<div class="video-box">
+  <iframe 
+    src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+    allowfullscreen>
+  </iframe>
+</div>
+```
 
   </div>
-<a href="about.html">نبذة عني</a>
+
+  <!-- زر الانتقال -->
+
+<a href="about.html" class="btn">الذهاب إلى صفحة نبذة عني</a>
+
+</div>
+
 </body>
 </html>
