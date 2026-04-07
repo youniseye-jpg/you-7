@@ -1,47 +1,670 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فيديو يوتيوب</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultra Calculator Pro</title>
+  <style>
+    :root{
+      --bg1:#07111f;
+      --bg2:#0f172a;
+      --glass:rgba(255,255,255,.08);
+      --glass-2:rgba(255,255,255,.12);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --accent2:#8b5cf6;
+      --success:#22c55e;
+      --danger:#ef4444;
+      --warning:#f59e0b;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:Tahoma;
-  background: linear-gradient(135deg,#0f3d91,#2563eb);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.video-box{
-  width:90%;
-  max-width:800px;
-  aspect-ratio:16/9;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  border-radius:20px;
-  overflow:hidden;
-}
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-</style>
+    body.light{
+      --bg1:#dbeafe;
+      --bg2:#f8fafc;
+      --glass:rgba(255,255,255,.65);
+      --glass-2:rgba(255,255,255,.88);
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#0284c7;
+      --accent2:#7c3aed;
+      --success:#16a34a;
+      --danger:#dc2626;
+      --warning:#d97706;
+      --shadow:0 18px 45px rgba(15,23,42,.14);
+    }
 
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top right, rgba(56,189,248,.15), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(139,92,246,.18), transparent 28%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+      transition:.35s ease;
+    }
+
+    .app{
+      width:100%;
+      max-width:1150px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+    }
+
+    .calculator,
+    .side-panel{
+      background:var(--glass);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      border-radius:32px;
+      overflow:hidden;
+    }
+
+    .calculator{
+      padding:24px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .brand h1{
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:.4px;
+    }
+
+    .brand p{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .mini-btn{
+      border:none;
+      cursor:pointer;
+      background:var(--glass-2);
+      color:var(--text);
+      padding:11px 15px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:700;
+      transition:.2s ease;
+      box-shadow:inset 0 -2px 0 rgba(255,255,255,.05);
+    }
+
+    .mini-btn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.06);
+    }
+
+    .display-wrap{
+      background:linear-gradient(180deg, rgba(2,6,23,.75), rgba(15,23,42,.4));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      padding:18px;
+      margin-bottom:18px;
+      min-height:200px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    body.light .display-wrap{
+      background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.65));
+    }
+
+    .status-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+      flex-wrap:wrap;
+    }
+
+    .status-chip{
+      padding:8px 12px;
+      background:rgba(255,255,255,.08);
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    .equation{
+      min-height:32px;
+      color:var(--muted);
+      font-size:22px;
+      direction:ltr;
+      text-align:left;
+      word-break:break-all;
+    }
+
+    .result{
+      font-size:52px;
+      font-weight:800;
+      line-height:1.15;
+      direction:ltr;
+      text-align:left;
+      word-break:break-all;
+    }
+
+    .keyboard-hint{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .buttons{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:12px;
+    }
+
+    button.calc-btn{
+      border:none;
+      height:74px;
+      border-radius:22px;
+      cursor:pointer;
+      color:var(--text);
+      font-size:24px;
+      font-weight:800;
+      background:rgba(255,255,255,.08);
+      box-shadow:
+        inset 0 -3px 0 rgba(255,255,255,.05),
+        0 8px 18px rgba(0,0,0,.16);
+      transition:.18s ease;
+    }
+
+    button.calc-btn:hover{
+      transform:translateY(-3px);
+      filter:brightness(1.08);
+    }
+
+    button.calc-btn:active{
+      transform:scale(.98);
+    }
+
+    .op{
+      background:linear-gradient(135deg, rgba(56,189,248,.9), rgba(139,92,246,.9));
+    }
+
+    .equal{
+      background:linear-gradient(135deg, var(--success), #15803d);
+      grid-column:span 2;
+    }
+
+    .danger{
+      background:linear-gradient(135deg, var(--danger), #b91c1c);
+    }
+
+    .warning{
+      background:linear-gradient(135deg, var(--warning), #c2410c);
+    }
+
+    .wide{
+      grid-column:span 2;
+    }
+
+    .side-panel{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .panel-card{
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:18px;
+    }
+
+    .panel-card h2{
+      font-size:20px;
+      margin-bottom:12px;
+    }
+
+    .clock{
+      font-size:34px;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .date{
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .history-list{
+      max-height:320px;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding-left:4px;
+    }
+
+    .history-item{
+      background:rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:12px 14px;
+      direction:ltr;
+      text-align:left;
+      cursor:pointer;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+
+    .history-item:hover{
+      border-color:rgba(255,255,255,.18);
+      transform:translateX(-2px);
+    }
+
+    .history-exp{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:6px;
+      word-break:break-all;
+    }
+
+    .history-res{
+      font-size:20px;
+      font-weight:800;
+      word-break:break-all;
+    }
+
+    .empty{
+      color:var(--muted);
+      font-size:15px;
+      text-align:center;
+      padding:20px 8px;
+    }
+
+    .footer-note{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.2);
+      border-radius:999px;
+    }
+
+    @media (max-width: 980px){
+      .app{
+        grid-template-columns:1fr;
+      }
+      .result{
+        font-size:42px;
+      }
+    }
+
+    @media (max-width: 560px){
+      .calculator,.side-panel{
+        border-radius:24px;
+      }
+      .buttons{
+        grid-template-columns: repeat(4,1fr);
+      }
+      .equal,.wide{
+        grid-column:span 1;
+      }
+      button.calc-btn{
+        height:66px;
+        font-size:21px;
+        border-radius:18px;
+      }
+      .result{
+        font-size:34px;
+      }
+      .equation{
+        font-size:18px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="app">
+    <section class="calculator">
+      <div class="topbar">
+        <div class="brand">
+          <h1>آلة حاسبة احترافية</h1>
+          <p>تصميم فاخر + دعم كامل للعمليات والكيبورد</p>
+        </div>
 
-<div class="video-box">
-  <iframe 
-    src="https://www.youtube.com/embed/ysz5S6PUM-U"
-    title="YouTube video player"
-    allowfullscreen>
-  </iframe>
-</div>
+        <div class="top-actions">
+          <button class="mini-btn" id="themeToggle">تبديل الثيم</button>
+          <button class="mini-btn" id="copyResult">نسخ الناتج</button>
+          <button class="mini-btn" id="clearHistory">مسح السجل</button>
+        </div>
+      </div>
 
+      <div class="display-wrap">
+        <div class="status-row">
+          <div class="status-chip" id="modeLabel">الوضع: عادي</div>
+          <div class="status-chip" id="liveClock">--:--:--</div>
+        </div>
+
+        <div class="equation" id="expression">0</div>
+        <div class="result" id="result">0</div>
+
+        <div class="keyboard-hint">
+          يدعم الكيبورد: 0-9 + - * / Enter Backspace Delete % ( )
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="calc-btn danger" data-action="all-clear">AC</button>
+        <button class="calc-btn warning" data-action="delete">DEL</button>
+        <button class="calc-btn op" data-value="(">(</button>
+        <button class="calc-btn op" data-value=")">)</button>
+        <button class="calc-btn op" data-value="%">%</button>
+
+        <button class="calc-btn" data-value="7">7</button>
+        <button class="calc-btn" data-value="8">8</button>
+        <button class="calc-btn" data-value="9">9</button>
+        <button class="calc-btn op" data-value="/">÷</button>
+        <button class="calc-btn op" data-value="**">x²</button>
+
+        <button class="calc-btn" data-value="4">4</button>
+        <button class="calc-btn" data-value="5">5</button>
+        <button class="calc-btn" data-value="6">6</button>
+        <button class="calc-btn op" data-value="*">×</button>
+        <button class="calc-btn op" data-action="sqrt">√</button>
+
+        <button class="calc-btn" data-value="1">1</button>
+        <button class="calc-btn" data-value="2">2</button>
+        <button class="calc-btn" data-value="3">3</button>
+        <button class="calc-btn op" data-value="-">−</button>
+        <button class="calc-btn op" data-action="pi">π</button>
+
+        <button class="calc-btn wide" data-value="0">0</button>
+        <button class="calc-btn" data-value=".">.</button>
+        <button class="calc-btn op" data-value="+">+</button>
+        <button class="calc-btn equal" data-action="equals">=</button>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="panel-card">
+        <h2>الوقت والتاريخ</h2>
+        <div class="clock" id="clock">--:--</div>
+        <div class="date" id="dateText">---</div>
+      </div>
+
+      <div class="panel-card">
+        <h2>سجل العمليات</h2>
+        <div class="history-list" id="historyList">
+          <div class="empty">لا يوجد سجل بعد</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>ملاحظات</h2>
+        <div class="footer-note">
+          يمكنك الضغط على أي عملية من السجل لإعادتها إلى الحاسبة.<br>
+          زر x² لتربيع الرقم الحالي، وزر √ للجذر التربيعي.<br>
+          لنسخ الناتج اضغط "نسخ الناتج".
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const expressionEl = document.getElementById("expression");
+    const resultEl = document.getElementById("result");
+    const historyList = document.getElementById("historyList");
+    const themeToggle = document.getElementById("themeToggle");
+    const copyResultBtn = document.getElementById("copyResult");
+    const clearHistoryBtn = document.getElementById("clearHistory");
+    const modeLabel = document.getElementById("modeLabel");
+    const liveClock = document.getElementById("liveClock");
+    const clockEl = document.getElementById("clock");
+    const dateText = document.getElementById("dateText");
+
+    let expression = "";
+    let history = JSON.parse(localStorage.getItem("ultraCalcHistory")) || [];
+
+    function formatDisplayExpression(exp) {
+      return exp
+        .replace(/\*/g, "×")
+        .replace(/\//g, "÷");
+    }
+
+    function safeEval(exp) {
+      try {
+        let sanitized = exp
+          .replace(/%/g, "/100")
+          .replace(/π/g, Math.PI);
+
+        if (!sanitized.trim()) return "";
+
+        const result = Function('"use strict"; return (' + sanitized + ')')();
+
+        if (typeof result !== "number" || !isFinite(result)) {
+          return "خطأ";
+        }
+
+        return Number(result.toFixed(10)).toString();
+      } catch {
+        return "خطأ";
+      }
+    }
+
+    function updateDisplay() {
+      expressionEl.textContent = expression ? formatDisplayExpression(expression) : "0";
+      const preview = expression ? safeEval(expression) : "0";
+      resultEl.textContent = preview;
+      modeLabel.textContent = preview === "خطأ" ? "الوضع: خطأ" : "الوضع: عادي";
+    }
+
+    function addValue(value) {
+      expression += value;
+      updateDisplay();
+    }
+
+    function clearAll() {
+      expression = "";
+      updateDisplay();
+    }
+
+    function deleteLast() {
+      expression = expression.slice(0, -1);
+      updateDisplay();
+    }
+
+    function calculateFinal() {
+      if (!expression) return;
+      const answer = safeEval(expression);
+      if (answer === "خطأ") {
+        resultEl.textContent = "خطأ";
+        modeLabel.textContent = "الوضع: خطأ";
+        return;
+      }
+
+      addToHistory(expression, answer);
+      expression = answer;
+      updateDisplay();
+    }
+
+    function addToHistory(exp, res) {
+      history.unshift({ exp, res });
+      history = history.slice(0, 15);
+      localStorage.setItem("ultraCalcHistory", JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      if (!history.length) {
+        historyList.innerHTML = '<div class="empty">لا يوجد سجل بعد</div>';
+        return;
+      }
+
+      historyList.innerHTML = "";
+      history.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+        div.innerHTML = `
+          <div class="history-exp">${formatDisplayExpression(item.exp)}</div>
+          <div class="history-res">${item.res}</div>
+        `;
+        div.addEventListener("click", () => {
+          expression = item.exp;
+          updateDisplay();
+        });
+        historyList.appendChild(div);
+      });
+    }
+
+    function squareCurrent() {
+      if (!expression) return;
+      expression = "(" + expression + ")**2";
+      updateDisplay();
+    }
+
+    function sqrtCurrent() {
+      if (!expression) return;
+      expression = "Math.sqrt(" + expression + ")";
+      updateDisplay();
+    }
+
+    function insertPi() {
+      expression += "π";
+      updateDisplay();
+    }
+
+    document.querySelectorAll(".calc-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const action = btn.dataset.action;
+        const value = btn.dataset.value;
+
+        if (value !== undefined) {
+          addValue(value);
+          return;
+        }
+
+        switch (action) {
+          case "all-clear":
+            clearAll();
+            break;
+          case "delete":
+            deleteLast();
+            break;
+          case "equals":
+            calculateFinal();
+            break;
+          case "sqrt":
+            sqrtCurrent();
+            break;
+          case "pi":
+            insertPi();
+            break;
+        }
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const allowed = "0123456789+-*/().%";
+      if (allowed.includes(e.key)) {
+        addValue(e.key);
+      } else if (e.key === "Enter" || e.key === "=") {
+        e.preventDefault();
+        calculateFinal();
+      } else if (e.key === "Backspace") {
+        deleteLast();
+      } else if (e.key === "Delete" || e.key === "Escape") {
+        clearAll();
+      }
+    });
+
+    copyResultBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(resultEl.textContent);
+        copyResultBtn.textContent = "تم النسخ";
+        setTimeout(() => copyResultBtn.textContent = "نسخ الناتج", 1200);
+      } catch {
+        copyResultBtn.textContent = "تعذر النسخ";
+        setTimeout(() => copyResultBtn.textContent = "نسخ الناتج", 1200);
+      }
+    });
+
+    clearHistoryBtn.addEventListener("click", () => {
+      history = [];
+      localStorage.removeItem("ultraCalcHistory");
+      renderHistory();
+    });
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("ultraCalcTheme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString("ar-EG");
+      const date = now.toLocaleDateString("ar-EG", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      const shortTime = now.toLocaleTimeString("ar-EG", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      liveClock.textContent = time;
+      clockEl.textContent = shortTime;
+      dateText.textContent = date;
+    }
+
+    const savedTheme = localStorage.getItem("ultraCalcTheme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+    }
+
+    renderHistory();
+    updateClock();
+    updateDisplay();
+    setInterval(updateClock, 1000);
+  </script>
 </body>
 </html>
