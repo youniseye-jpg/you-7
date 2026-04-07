@@ -4,59 +4,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>يونس عبد القادر محمد غريب</title>
+<title>فيديو يوتيوب</title>
 
 <style>
 body{
-  font-family:Tahoma;
-  text-align:center;
-  background: linear-gradient(135deg,#0f3d91,#2563eb);
-  color:white;
   margin:0;
+  font-family:Tahoma;
+  background: linear-gradient(135deg,#0f3d91,#2563eb);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
-
-.container{
-  width:90%;
-  max-width:900px;
-  margin:auto;
-  padding:40px 0;
-}
-
-.section{
-  background:white;
-  color:black;
-  padding:20px;
-  border-radius:15px;
-  margin-top:30px;
-}
-
-.btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:12px 25px;
-  background:#2563eb;
-  color:white;
-  text-decoration:none;
-  border-radius:10px;
-  font-size:18px;
-  transition:0.3s;
-}
-.btn:hover{
-  background:#1e40af;
-}
-
 .video-box{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
+  width:90%;
+  max-width:800px;
+  aspect-ratio:16/9;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  border-radius:20px;
+  overflow:hidden;
 }
-.video-box iframe{
-  position:absolute;
+iframe{
   width:100%;
   height:100%;
-  left:0;
-  top:0;
-  border-radius:12px;
+  border:none;
 }
 </style>
 
@@ -64,33 +35,12 @@ body{
 
 <body>
 
-<div class="container">
-
-  <h1>يونس عبد القادر محمد غريب</h1>
-
-  <div class="section">
-    <h2>نبذة</h2>
-    <p>أخصائي بصريات ومؤلف مهتم بالتطوير العلمي والمعرفي.</p>
-  </div>
-
-  <div class="section">
-    <h2>الفيديو</h2>
-
-```
 <div class="video-box">
   <iframe 
-    src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+    src="https://www.youtube.com/embed/ysz5S6PUM-U"
+    title="YouTube video player"
     allowfullscreen>
   </iframe>
-</div>
-```
-
-  </div>
-
-  <!-- زر الانتقال -->
-
-<a href="about.html" class="btn">الذهاب إلى صفحة نبذة عني</a>
-
 </div>
 
 </body>
